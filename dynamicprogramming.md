@@ -14,7 +14,7 @@ to know capacity of weight, and the table of values stated item list together wi
 |   |   |   |   |   |
 |   |   |   |   |   |
 
-py ```
+```
 
 def KnapSack(capacity,weight,vallue,n):
 
@@ -34,8 +34,8 @@ def KnapSack(capacity,weight,vallue,n):
       n = len(profit)
       print(KnapSack(capacity, weight, profit,n)
       
+  ```
 
-```
 
 Base Case if n == 0 or capacity == 0: return 0.
 if weight of the nth item is more than Knapsack capacity , then the item cannot be include in optimal solution
