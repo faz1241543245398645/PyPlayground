@@ -16,23 +16,37 @@ to know capacity of weight, and the table of values stated item list together wi
 
 ```
 
-def KnapSack(capacity,weight,vallue,n):
+def knapsack(W, wt, val, n):
+    # Initialize a 2D array to store the maximum value of items that can be picked up
+    # for every weight from 0 to W and for every item from 0 to n
+    # we need to store the values for all possible combinations of weights and items, including 0 weight and 0 item thats why we increment the size of the element by 1
+    K = [[0 for x in range(W+1)] for x in range(n+1)]
+ 
+    # Build table K[][] in bottom-up manner
+    for i in range(n+1):
+        for w in range(W+1):
+            if i==0 or w==0: #basecase , notice there are or there. means if the weight is still bigger than capacity given it will go to the basecase
+                #but we dont increase the capacity ,we just increase the i so that it can iterate bigger set of array each time
+                K[i][w] = 0
+            elif wt[i-1] <= w:
+                K[i][w] = max(val[i-1] + K[i-1][w-wt[i-1]], K[i-1][w])
+            else:
+                K[i][w] = K[i-1][w]
+            print(K[i][w],"K[",i,"][",w,"]") #notice that the w is always 5, its because the w have finished iterate until 5
+        #for loop should iterate until 6 right? because the w is 5 + 1
+        # yes its 5 + 1 but the element is [0,1,2,3,4,5]
+ 
+    return K[n][W]
 
-# ---------- base case ----------
-  if n == 0 or capacity == 0:
-    return 0
-  if (weight[ n - 1] > w):
-    return KnapSack(capacity,weight,value, n - 1)
-   else:
-    return max(
-      val[ n - 1] + KnapSack( capacity - weight[ n-1 ], weight, value, n-1 ), KnapSack(capacity, weight, value, n-1)
-      
-   if __name__ == '__main__':
-      profit = [60,100,120]
-      wweight = [10,20,30]
-      capacity = 50
-      n = len(profit)
-      print(KnapSack(capacity, weight, profit,n)
+
+Item = [1,2,3,4,5]
+Weight = [3,1,1,2,2]
+Value = [13,12,10,17,15]
+
+n = len(Item)
+W = 6
+
+print(knapsack(W, Weight, Value, n))
       
   ```
 
